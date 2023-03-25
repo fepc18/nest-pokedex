@@ -3,8 +3,9 @@ import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { HttpStatus } from '@nestjs/common/enums';
-import { HttpCode } from '@nestjs/common/decorators';
+import { HttpCode, Query } from '@nestjs/common/decorators';
 import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id/parse-mongo-id.pipe';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 //https://docs.nestjs.com/techniques/versioning
 @Controller({
   version: '1',
@@ -20,13 +21,14 @@ export class PokemonController {
   }
 
   @Get()
-  findAll() {
-    return this.pokemonService.findAll();
+  findAll( @Query() paginationDto:PaginationDto) {
+    console.log({paginationDto});
+    return this.pokemonService.findAll(paginationDto);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pokemonService.findOne(id); //+id (transformar a string)
+    return this.pokemonService.findOne(id); //+id (transform to number)
   }
 
   @Patch(':term')
