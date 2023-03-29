@@ -1,6 +1,6 @@
-import { HttpAdapter } from '../../../dist/common/interfaces/http-adapter.interface';
 import axios, { AxiosInstance } from 'axios';
 import { Injectable } from '@nestjs/common';
+import { HttpAdapter } from '../interfaces/http-adapter.interface';
 
 @Injectable()
 export class AxiosAdapter implements HttpAdapter{
